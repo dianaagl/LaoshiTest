@@ -27,21 +27,13 @@ data class Book(
     val url: String?,
     val words: List<Int>?,
     @Json(name = "words_count")
-    val wordsCount: Int
+    val wordsCount: Int,
+    @Json(name = "parent_id")
+    var parentId: Int = -1
 )
 @JsonClass(generateAdapter = true)
 data class Collection(
-    val children: List<CollectionItem>,
-    val description: Map<String, String>,
-    val id: Int,
-    val style: Style?,
-    val title: Map<String, String>,
-    val type: String,
-    val words: List<Int>?
-)
-@JsonClass(generateAdapter = true)
-data class CollectionItem(
-    val children: List<CollectionItem>,
+    val children: List<Collection>,
     val description: Map<String, String>,
     val id: Int,
     val style: Style?,
@@ -49,21 +41,13 @@ data class CollectionItem(
     val type: String,
     val words: List<Int>?,
     @Json(name = "words_count")
-    val wordsCount: Int
+    val wordsCount: Int = 0,
+    @Json(name = "category_id")
+    var categoryId: Int = -1
 )
 @JsonClass(generateAdapter = true)
 data class Hsk(
-    val children: List<HskItem>,
-    val description: Map<String, String>,
-    val id: Int,
-    val style: Style?,
-    val title: Map<String, String>,
-    val type: String,
-    val words: List<Int>?
-)
-@JsonClass(generateAdapter = true)
-data class HskItem(
-    val children: List<HskItem>,
+    val children: List<Hsk>,
     val description: Map<String, String>,
     val id: Int,
     val style: Style?,
@@ -71,7 +55,9 @@ data class HskItem(
     val type: String,
     val words: List<Int>?,
     @Json(name = "words_count")
-    val wordsCount: Int
+    val wordsCount: Int = 0,
+    @Json(name = "hsk_id")
+    var hskId: Int = -1
 )
 @JsonClass(generateAdapter = true)
 data class Image(
