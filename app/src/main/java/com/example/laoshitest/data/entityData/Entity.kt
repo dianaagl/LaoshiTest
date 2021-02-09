@@ -88,7 +88,7 @@ data class Collection(
     val wordsCount: Int = 0,
     @Json(name = "category_id")
     var categoryId: Int = -1,
-    @Ignore val children: List<Collection>
+    @Ignore var children: List<Collection>
 ){
     constructor(id: Int, description: Map<String, String>, style: Style?,
                 title: Map<String, String>, type: String, words: List<Int>?, wordsCount: Int, categoryId: Int)
@@ -113,7 +113,7 @@ data class Hsk(
     val wordsCount: Int = 0,
     @Json(name = "hsk_id")
     var hskId: Int = -1,
-    @Ignore val children: List<Hsk>,
+    @Ignore var children: List<Hsk>,
 ){    constructor(id: Int, description: Map<String, String>, style: Style?,
                   title: Map<String, String>, type: String, words: List<Int>?, wordsCount: Int, hskId: Int)
         : this(id, description, style, title, type, words, wordsCount, hskId, listOf())

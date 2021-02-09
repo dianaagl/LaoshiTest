@@ -11,6 +11,15 @@ interface CollectionDAO {
     @Query("SELECT * FROM collection")
     fun getAllCollections(): List<Collection>
 
+    @Query("SELECT * FROM collection WHERE categoryId=:id")
+    fun getCollectionsByCategory(id: Int): List<Collection>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllCollections(books: List<Collection>)
+
+    @Query("SELECT * FROM collection WHERE type='category'")
+    fun getCategories(): List<Collection>
+
+
+
 }

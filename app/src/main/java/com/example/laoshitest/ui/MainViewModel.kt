@@ -1,4 +1,4 @@
-package com.example.laoshitest
+package com.example.laoshitest.ui
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -10,23 +10,25 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.viewModelScope
+import com.example.laoshitest.LaoshiApp
+import com.example.laoshitest.R
 import com.example.laoshitest.data.entityData.Book
 import com.example.laoshitest.data.entityData.Collection
 import com.example.laoshitest.data.entityData.Hsk
 import com.example.laoshitest.db.LaoshiDB
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 import java.lang.reflect.Type
 
 class MainViewModel: ViewModel() {
-    private lateinit var mDatabase: LaoshiDB
+    private val mDatabase: LaoshiDB = LaoshiDB.getDatabase(LaoshiApp.applicationContext())
 
     var type: Type = Types.newParameterizedType(
         List::class.java,
         WordItem::class.java
     )
     fun initData(context: Context){
-        mDatabase = LaoshiDB.getDatabase(LaoshiApp.applicationContext())
         viewModelScope.launch(Dispatchers.IO) {
             val text = FileHelper.getJsonFromRaw(context, R.raw.words)
             parseWords(text ?: "")
@@ -87,5 +89,12 @@ class MainViewModel: ViewModel() {
         val adapter: JsonAdapter<Entity> = moshi.adapter(Entity::class.java)
         val data = adapter.fromJson(text)
         return data
+    }
+
+    suspend fun getCategories(): List<Int>{
+        return withContext(Dispatchers.IO) {
+            val categories = mDatabase.collectionDAO().getCategories()
+            categories.map { it.id }
+        }
     }
 }

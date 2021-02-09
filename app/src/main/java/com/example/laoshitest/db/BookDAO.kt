@@ -12,6 +12,15 @@ interface BookDAO {
     @Query("SELECT * FROM book")
     fun getAllBooks(): List<Book>
 
+    @Query("SELECT * FROM book WHERE type='series'")
+    fun getBookSeries(): List<Book>
+
+    @Query("SELECT * FROM book WHERE type='book' AND parentId=:id")
+    fun getBooksFromSerie(id: Int): List<Book>
+
+    @Query("SELECT * FROM book WHERE type='lesson' AND parentId=:id")
+    fun getLessonsFromBook(id: Int): List<Book>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllBooks(books: List<Book>)
 }
