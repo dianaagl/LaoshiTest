@@ -29,4 +29,7 @@ interface HskDAO {
 
     @Query("SELECT * FROM hsk WHERE type='level'")
     fun getCategories(): List<Hsk>
+
+    @Query("SELECT * FROM hsk WHERE id=:id")
+    fun getHskById(id: Int): Hsk?
 }

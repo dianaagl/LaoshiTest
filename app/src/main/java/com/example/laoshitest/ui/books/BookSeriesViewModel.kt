@@ -16,18 +16,23 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.net.URL
 
-class BookViewModel: ViewModel() {
+class BookSeriesViewModel: ViewModel() {
     private val mDatabase: LaoshiDB = LaoshiDB.getDatabase(LaoshiApp.applicationContext())
 
-    private val _serie = MutableLiveData<Book>()
-    val serie: LiveData<Book> = _serie
+    private val _books = MutableLiveData<List<Book>>()
+    val books: LiveData<List<Book>> = _books
 
-    fun getSerie(id: Int){
+    fun getBookSeries(){
         viewModelScope.launch(Dispatchers.IO) {
-            val list = mDatabase.bookDAO().getBookChildren(id)
-            val serieItem = mDatabase.bookDAO().getBookById(id)
-            serieItem?.children = list
-            _serie.postValue(serieItem)
+            val list = mDatabase.bookDAO().getBookSeries()
+            _books.postValue(list)
+        }
+    }
+
+    fun getBooksFromSeries(id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = mDatabase.bookDAO().getBooksFromSerie(id)
+            _books.postValue(list)
         }
     }
 }

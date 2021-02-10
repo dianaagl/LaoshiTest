@@ -13,7 +13,8 @@ import com.example.laoshitest.utils.Utils
 
 class CollectionListAdapter(
     private var values: List<Collection>,
-    val context: Context
+    val context: Context,
+    val clickListener: (Collection) -> Unit
 ) : RecyclerView.Adapter<CollectionListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,6 +27,7 @@ class CollectionListAdapter(
         val item = values[position]
         holder.descriptionView.text = item.title.get(Utils.getLng(context))
         holder.numberView.text = item.wordsCount.toString()
+        holder.itemView.setOnClickListener { clickListener(item) }
     }
 
     override fun getItemCount(): Int = values.size

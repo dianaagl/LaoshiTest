@@ -1,5 +1,6 @@
 package com.example.laoshitest.ui.hsks
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.laoshitest.R
+import com.example.laoshitest.data.entityData.Hsk
+import com.example.laoshitest.ui.words.WordsActivity
 
 /**
  * A fragment representing a list of Items.
@@ -26,7 +29,13 @@ class HsksFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.categories_list, container, false)
-        val adapter = HskLevelListAdapter(listOf())
+        val adapter = HskLevelListAdapter(listOf()
+        ) { item: Hsk ->
+            val intent = Intent(context, WordsActivity::class.java)
+            intent.putExtra(WordsActivity.entityType, "hsk");
+            intent.putExtra(WordsActivity.entityId, item.id);
+            startActivity(intent)
+        }
         val list = view.findViewById<RecyclerView>(R.id.vertRecycler)
         list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         list.adapter = adapter

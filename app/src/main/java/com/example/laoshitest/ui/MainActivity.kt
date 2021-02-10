@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.laoshitest.R
-import com.example.laoshitest.ui.books.BooksFragment
+import com.example.laoshitest.ui.books.BooksSeriesFragment
 import com.example.laoshitest.ui.collections.CategoriesFragment
 import com.example.laoshitest.ui.hsks.HsksFragment
-import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 trans.commit()
             }
             R.id.books_id -> {
-                val fragment = BooksFragment()
+                val fragment = BooksSeriesFragment()
                 trans.replace(R.id.root_fragment, fragment)
                 trans.commit()
             }

@@ -12,7 +12,8 @@ import com.example.laoshitest.utils.Utils
 
 class HskListAdapter(
     private var values: List<Hsk>,
-    val context: Context
+    val context: Context,
+    val clickListener: (Hsk) -> Unit
 ) : RecyclerView.Adapter<HskListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,6 +26,9 @@ class HskListAdapter(
         val item = values[position]
         holder.descriptionView.text = item.title.get(Utils.getLng(context))
         holder.numberView.text = item.wordsCount.toString()
+        holder.itemView.setOnClickListener{
+            clickListener(item)
+        }
     }
 
     override fun getItemCount(): Int = values.size

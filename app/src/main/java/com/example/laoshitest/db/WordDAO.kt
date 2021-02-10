@@ -11,6 +11,10 @@ interface WordDAO {
     @Query("SELECT * FROM word")
     fun getAllWords(): List<WordItem>
 
+    @Query("SELECT * FROM word WHERE id IN (:ids)")
+    fun getWordsByIds(ids: List<Int>): List<WordItem>?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllWords(books: List<WordItem>)
+
 }

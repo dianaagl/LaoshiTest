@@ -46,7 +46,7 @@ data class Book(
     val wordsCount: Int,
     @Json(name = "parent_id")
     var parentId: Int = -1,
-    @Ignore val children: List<Book>
+    @Ignore var children: List<Book>
 ) {
     constructor(
         id: Int,

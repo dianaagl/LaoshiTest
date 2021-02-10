@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    android:layout_margin="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="80dp">
-    <TextView
-        android:id="@+id/description"
-        android:text="description"
+    android:layout_height="wrap_content"
+    style="@style/ShapeAppearance.App.MediumComponent">
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp"
-        style="@style/TextAppearance.MaterialComponents.Button"/>
-    <TextView
-        android:id="@+id/number"
-        android:text="65"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/description"
-        android:layout_alignRight="@+id/description" />
-</RelativeLayout>
+        android:layout_height="80dp"
+        android:padding="5dp"
+        >
+        <TextView
+            android:id="@+id/description"
+            android:text="description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            />
+        <TextView
+            android:id="@+id/number"
+            android:text="65"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

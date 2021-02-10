@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.laoshitest.R
 import com.example.laoshitest.utils.Utils
 
-class CategoriesListAdapter(private var parents : List<Collection>) :
+class CategoriesListAdapter(private var parents : List<Collection>, val clickListener: (Collection) -> Unit) :
     RecyclerView.Adapter<CategoriesListAdapter.ViewHolder>(){
 
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -35,7 +35,7 @@ class CategoriesListAdapter(private var parents : List<Collection>) :
 
         holder.recyclerView.apply {
             layoutManager = childLayoutManager
-            adapter = CollectionListAdapter(parent.children, context)
+            adapter = CollectionListAdapter(parent.children, context, clickListener)
             setRecycledViewPool(viewPool)
         }
         holder.categoryName.text = parent.title.get(Utils.getLng(holder.recyclerView.context))

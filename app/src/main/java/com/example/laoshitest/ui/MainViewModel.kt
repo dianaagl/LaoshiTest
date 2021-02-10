@@ -31,7 +31,9 @@ class MainViewModel: ViewModel() {
     fun initData(context: Context){
         viewModelScope.launch(Dispatchers.IO) {
             val text = FileHelper.getJsonFromRaw(context, R.raw.words)
-            parseWords(text ?: "")
+            val words = parseWords(text)
+            mDatabase.wordDAO().insertAllWords(words)
+
             val text2 = FileHelper.getJsonFromRaw(context, R.raw.entity)
             val entity = parseEntities(text2)
             entity?.let {
@@ -48,9 +50,9 @@ class MainViewModel: ViewModel() {
                      insertCollectionChildren(it.children, it.id)
                 }
             }
-
         }
     }
+
     fun insertHskChildren(children: List<Hsk>, id: Int) {
         mDatabase.hskDAO().insertAllHsk(children.map {
             it.hskId = id

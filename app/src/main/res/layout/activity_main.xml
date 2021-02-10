@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="списки"
+        android:text="@string/lists"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -20,13 +20,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:clickable="true"
+            android:checkable="true"
             android:onClick="onCLick"
             android:id="@+id/col_id"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             app:icon="@drawable/ic_baseline_topic_24"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:text="по темам"
+            android:text="@string/by_topics_string"
+            style="@style/TypeButton"
             />
         <Button
             android:onClick="onCLick"
@@ -34,8 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             app:icon="@drawable/ic_baseline_topic_24"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:text="из учебников"
+            style="@style/TypeButton"
+            android:text="@string/from_books_string"
             />
         <Button
             android:onClick="onCLick"
@@ -43,8 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             app:icon="@drawable/ic_baseline_topic_24"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:text="hsk"
+            style="@style/TypeButton"
+            android:text="@string/hsk"
             />
         <Button
             android:onClick="onCLick"
@@ -52,8 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             app:icon="@drawable/ic_baseline_topic_24"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:text="мои"
+            style="@style/TypeButton"
+            android:text="@string/mine_string"
             />
     </LinearLayout>
 <androidx.fragment.app.FragmentContainerView

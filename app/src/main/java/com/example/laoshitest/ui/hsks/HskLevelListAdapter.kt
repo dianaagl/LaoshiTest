@@ -5,13 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.laoshitest.data.entityData.Collection
 import androidx.recyclerview.widget.RecyclerView
 import com.example.laoshitest.R
 import com.example.laoshitest.data.entityData.Hsk
 import com.example.laoshitest.utils.Utils
 
-class HskLevelListAdapter(private var parents : List<Hsk>) :
+class HskLevelListAdapter(private var parents: List<Hsk>, val click: (Hsk) -> Unit) :
     RecyclerView.Adapter<HskLevelListAdapter.ViewHolder>(){
 
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -35,7 +34,7 @@ class HskLevelListAdapter(private var parents : List<Hsk>) :
 
         holder.recyclerView.apply {
             layoutManager = childLayoutManager
-            adapter = HskListAdapter(parent.children, context)
+            adapter = HskListAdapter(parent.children, context, click)
             setRecycledViewPool(viewPool)
         }
         holder.categoryName.text = parent.title.get(Utils.getLng(holder.recyclerView.context))
