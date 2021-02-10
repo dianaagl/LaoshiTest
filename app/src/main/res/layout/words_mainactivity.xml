@@ -4,25 +4,22 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.google.android.material.appbar.AppBarLayout
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <RelativeLayout
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
-    </RelativeLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <TextView
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_margin="15dp"
+            android:id="@+id/words_title"/>
+    </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         class="com.example.bikefm2.ui.bottomPanel.ModalBottomSheetFragment"
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
@@ -31,11 +28,12 @@
         app:behavior_peekHeight="150dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:tag="bottom_sheet"
+        style="@style/ShapeAppearance.App.MediumComponent"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/wordsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,10 @@ class BookActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.book_activity_layout)
+        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         serieViewModel = ViewModelProvider(this).get<BookViewModel>(BookViewModel::class.java)
 
@@ -69,5 +74,20 @@ class BookActivity: AppCompatActivity() {
 
             }
         })
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val serie = serieViewModel.serie.value
+            when(serie?.type) {
+                "series" -> {
+                    onBackPressed()
+                }
+                "book" -> {
+                    bookId = serie.parentId
+                    serieViewModel.getSerie(bookId)
+                }
+            }
+
+        return super.onSupportNavigateUp()
     }
 }

@@ -18,24 +18,33 @@ class WordsViewModel: ViewModel() {
     private val _words = MutableLiveData<List<WordItem>>()
     val words: LiveData<List<WordItem>> = _words
 
-    fun initData(id: Int, type: String){
+    private val _title = MutableLiveData<String>()
+    val title: LiveData<String> = _title
+
+    fun initData(id: Int, type: String, lng: String){
         viewModelScope.launch(Dispatchers.IO) {
             when(type){
                 "book" -> {
                     val book = mDatabase.bookDAO().getBookById(id)
-                    book?.let { val words = book.words
+                    book?.let {
+                        _title.postValue(it.title[lng])
+                        val words = book.words
                         words?.let { _words.postValue(mDatabase.wordDAO().getWordsByIds(words)) }
                     }
                 }
                 "hsk" -> {
                     val hsk = mDatabase.hskDAO().getHskById(id)
-                    hsk?.let { val words = hsk.words
+                    hsk?.let {
+                        _title.postValue(it.title[lng])
+                        val words = hsk.words
                         words?.let { _words.postValue(mDatabase.wordDAO().getWordsByIds(words)) }
                     }
                 }
                 "collection" -> {
                     val collection = mDatabase.collectionDAO().getCollectionById(id)
-                    collection?.let { val words = it.words
+                    collection?.let {
+                        _title.postValue(it.title[lng])
+                        val words = it.words
                         words?.let { it2 -> _words.postValue(mDatabase.wordDAO().getWordsByIds(it2)) }
                     }
                 }
