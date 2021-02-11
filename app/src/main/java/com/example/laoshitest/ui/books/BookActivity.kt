@@ -6,7 +6,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +20,7 @@ class BookActivity: AppCompatActivity() {
         const val bookIdString = "book_id"
     }
     private lateinit var serieViewModel: BookViewModel
-    var bookId:Int = 0
+    private var bookId:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +30,7 @@ class BookActivity: AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        serieViewModel = ViewModelProvider(this).get<BookViewModel>(BookViewModel::class.java)
+        serieViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
 
         val title = findViewById<TextView>(R.id.title)
         val description = findViewById<TextView>(R.id.description)
@@ -53,7 +52,7 @@ class BookActivity: AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         bookId = intent.extras?.get(bookIdString) as Int
         serieViewModel.getSerie(bookId)
-        serieViewModel.serie.observe(this, Observer {
+        serieViewModel.serie.observe(this, {
             it?.let {
                 when(it.type) {
                     "series" -> {

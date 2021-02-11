@@ -1,17 +1,14 @@
 package com.example.laoshitest.ui.books
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.os.ConfigurationCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.example.laoshitest.R
 import com.example.laoshitest.data.entityData.Book
-import com.example.laoshitest.data.entityData.Collection
 import com.example.laoshitest.utils.Utils
 import com.squareup.picasso.Picasso
 

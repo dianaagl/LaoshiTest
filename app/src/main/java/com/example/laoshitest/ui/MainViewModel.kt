@@ -21,14 +21,15 @@ import kotlinx.coroutines.withContext
 
 import java.lang.reflect.Type
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
     private val mDatabase: LaoshiDB = LaoshiDB.getDatabase(LaoshiApp.applicationContext())
 
     var type: Type = Types.newParameterizedType(
         List::class.java,
         WordItem::class.java
     )
-    fun initData(context: Context){
+
+    fun initData(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             val text = FileHelper.getJsonFromRaw(context, R.raw.words)
             val words = parseWords(text)
@@ -42,18 +43,18 @@ class MainViewModel: ViewModel() {
                     insertHskChildren(hsk.children, hsk.id)
                 }
                 mDatabase.bookDAO().insertAllBooks(it.books)
-                it.books.forEach {
-                    insertBookChildren(it.children, it.id)
+                it.books.forEach { book ->
+                    insertBookChildren(book.children, book.id)
                 }
                 mDatabase.collectionDAO().insertAllCollections(it.collections)
-                it.collections.forEach {
-                     insertCollectionChildren(it.children, it.id)
+                it.collections.forEach { coll ->
+                    insertCollectionChildren(coll.children, coll.id)
                 }
             }
         }
     }
 
-    fun insertHskChildren(children: List<Hsk>, id: Int) {
+    private fun insertHskChildren(children: List<Hsk>, id: Int) {
         mDatabase.hskDAO().insertAllHsk(children.map {
             it.hskId = id
             insertHskChildren(it.children, it.id)
@@ -61,42 +62,35 @@ class MainViewModel: ViewModel() {
         })
     }
 
-    fun insertBookChildren(children: List<Book>, id: Int){
+    private fun insertBookChildren(children: List<Book>, id: Int) {
         mDatabase.bookDAO().insertAllBooks(
-        children.map {
-            it.parentId = id
-            insertBookChildren(it.children, it.id)
-            it
-        })
+            children.map {
+                it.parentId = id
+                insertBookChildren(it.children, it.id)
+                it
+            })
     }
 
-    fun insertCollectionChildren(children: List<Collection>, id: Int){
+    private fun insertCollectionChildren(children: List<Collection>, id: Int) {
         mDatabase.collectionDAO().insertAllCollections(
-        children.map {
-            it.categoryId = id
-            insertCollectionChildren(it.children, it.id)
-            it
-        })
+            children.map {
+                it.categoryId = id
+                insertCollectionChildren(it.children, it.id)
+                it
+            })
     }
 
-    fun parseWords(text: String): List<WordItem> {
+    private fun parseWords(text: String): List<WordItem> {
         val moshi = Moshi.Builder().build()
         val adapter: JsonAdapter<List<WordItem>> = moshi.adapter(type)
         return adapter.fromJson(text) ?: listOf()
     }
 
-    fun parseEntities(text: String): Entity? {
+    private fun parseEntities(text: String): Entity? {
         val moshi = Moshi.Builder()
             .build()
         val adapter: JsonAdapter<Entity> = moshi.adapter(Entity::class.java)
         val data = adapter.fromJson(text)
         return data
-    }
-
-    suspend fun getCategories(): List<Int>{
-        return withContext(Dispatchers.IO) {
-            val categories = mDatabase.collectionDAO().getCategories()
-            categories.map { it.id }
-        }
     }
 }

@@ -19,10 +19,7 @@ import com.example.laoshitest.ui.words.WordsActivity
  */
 class HsksFragment : Fragment() {
 
-    lateinit var hsksViewModel: HsksViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var hsksViewModel: HsksViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,8 +29,8 @@ class HsksFragment : Fragment() {
         val adapter = HskLevelListAdapter(listOf()
         ) { item: Hsk ->
             val intent = Intent(context, WordsActivity::class.java)
-            intent.putExtra(WordsActivity.entityType, "hsk");
-            intent.putExtra(WordsActivity.entityId, item.id);
+            intent.putExtra(WordsActivity.entityType, "hsk")
+            intent.putExtra(WordsActivity.entityId, item.id)
             startActivity(intent)
         }
         val list = view.findViewById<RecyclerView>(R.id.vertRecycler)
@@ -42,7 +39,7 @@ class HsksFragment : Fragment() {
 
         hsksViewModel = ViewModelProvider(this).get<HsksViewModel>(HsksViewModel::class.java)
         hsksViewModel.getAllCollections()
-        hsksViewModel.collections.observe(viewLifecycleOwner, Observer {
+        hsksViewModel.collections.observe(viewLifecycleOwner, {
             adapter.updateList(it)
         })
         return view

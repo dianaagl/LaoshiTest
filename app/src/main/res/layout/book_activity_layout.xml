@@ -31,6 +31,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/my_toolbar"
         android:layout_marginBottom="10dp"
+        android:layout_alignParentEnd="true"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lessonsList"

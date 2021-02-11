@@ -3,12 +3,11 @@ package com.example.laoshitest.ui.collections
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.laoshitest.data.entityData.Collection
 import androidx.recyclerview.widget.RecyclerView
 import com.example.laoshitest.R
+import com.example.laoshitest.data.entityData.Collection
 import com.example.laoshitest.utils.Utils
 
 class CategoriesListAdapter(private var parents : List<Collection>, val clickListener: (Collection) -> Unit) :

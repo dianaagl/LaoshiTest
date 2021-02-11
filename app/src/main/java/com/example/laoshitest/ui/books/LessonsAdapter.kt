@@ -24,7 +24,7 @@ class LessonsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.descriptionView.text = item.title.get(Utils.getLng(context))
+        holder.descriptionView.text = item.title[Utils.getLng(context)]
         holder.numberView.text = item.wordsCount.toString()
         holder.indexView.text = item.index.toString()
         holder.itemView.setOnClickListener { clickListener(item) }

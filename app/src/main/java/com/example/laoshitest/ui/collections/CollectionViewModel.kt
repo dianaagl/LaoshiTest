@@ -16,16 +16,9 @@ class CollectionViewModel: ViewModel() {
     private val _collections = MutableLiveData<List<Collection>>()
     val collections: LiveData<List<Collection>> = _collections
 
-    fun getCollectionsByCategory(id: Int){
-        viewModelScope.launch(Dispatchers.IO) {
-            val list = mDatabase.collectionDAO().getCollectionsByCategory(id)
-            _collections.postValue(list)
-        }
-    }
-
     fun getAllCollections() {
         viewModelScope.launch(Dispatchers.IO) {
-            var list = mDatabase.collectionDAO().getCategories().toMutableList()
+            val list = mDatabase.collectionDAO().getCategories().toMutableList()
             list.forEach {
                 it.children = mDatabase.collectionDAO().getCollectionsByCategory(it.id)
             }

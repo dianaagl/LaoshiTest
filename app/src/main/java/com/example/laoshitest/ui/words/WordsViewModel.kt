@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.laoshitest.LaoshiApp
-import com.example.laoshitest.data.entityData.Book
 import com.example.laoshitest.data.wordData.WordItem
 import com.example.laoshitest.db.LaoshiDB
 import kotlinx.coroutines.Dispatchers

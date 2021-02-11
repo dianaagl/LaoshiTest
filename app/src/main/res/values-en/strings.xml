@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LaoshiTest</string>
+    <string name="from_books_string">from books</string>
+    <string name="by_topics_string">by topics</string>
+    <string name="mine_string">mine</string>
+    <string name="hsk">hsk</string>
+    <string name="lists">lists</string>
+</resources>

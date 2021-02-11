@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +16,7 @@ import com.example.laoshitest.R
  */
 class BooksSeriesFragment : Fragment() {
 
-    lateinit var bookViewModel: BookSeriesViewModel
+    private lateinit var bookViewModel: BookSeriesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +33,9 @@ class BooksSeriesFragment : Fragment() {
         list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         list.adapter = adapter
 
-        bookViewModel = ViewModelProvider(this).get<BookSeriesViewModel>(BookSeriesViewModel::class.java)
+        bookViewModel = ViewModelProvider(this).get(BookSeriesViewModel::class.java)
         bookViewModel.getBookSeries()
-        bookViewModel.books.observe(viewLifecycleOwner, Observer {
+        bookViewModel.books.observe(viewLifecycleOwner, {
             adapter.updateList(it)
         })
         return view

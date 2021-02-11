@@ -37,7 +37,7 @@ class HskLevelListAdapter(private var parents: List<Hsk>, val click: (Hsk) -> Un
             adapter = HskListAdapter(parent.children, context, click)
             setRecycledViewPool(viewPool)
         }
-        holder.categoryName.text = parent.title.get(Utils.getLng(holder.recyclerView.context))
+        holder.categoryName.text = parent.title[Utils.getLng(holder.recyclerView.context)]
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){

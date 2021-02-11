@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.laoshitest.data.entityData.Book
 import com.example.laoshitest.data.entityData.Collection
-import com.example.laoshitest.data.entityData.Entity
 import com.example.laoshitest.data.entityData.Hsk
 import com.example.laoshitest.data.wordData.*
 

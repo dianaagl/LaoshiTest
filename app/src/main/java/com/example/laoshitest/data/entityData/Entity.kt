@@ -1,9 +1,10 @@
 package com.example.laoshitest.data.entityData
 
 
-import androidx.room.*
 import androidx.room.Entity
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.example.laoshitest.data.wordData.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -66,8 +67,7 @@ data class Book(
             : this(
         id, description, image, images, index, locales, style, title, type, url, words,
         wordsCount, parentId, listOf()
-    ) {
-    }
+    )
 }
 @Entity(tableName = "collection")
 @JsonClass(generateAdapter = true)

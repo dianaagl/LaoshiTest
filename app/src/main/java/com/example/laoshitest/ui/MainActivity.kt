@@ -19,9 +19,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         mainViewModel = ViewModelProvider(this).get<MainViewModel>(MainViewModel::class.java)
         mainViewModel.initData(this)
+        val button = findViewById<Button>(R.id.col_id)
+        checkList.add(button)
+        button.isSelected = true
     }
 
      fun onCLick(view: View){

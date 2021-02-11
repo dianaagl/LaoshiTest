@@ -2,8 +2,8 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginBottom="10dp"
-    android:layout_height="80dp"
+    android:layout_marginBottom="@dimen/item_margin"
+    android:layout_height="@dimen/item_height"
     style="@style/ShapeAppearance.App.MediumComponent">
         <TextView
             android:id="@+id/title"
@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:text="назван"
             android:layout_gravity="start"
-                android:layout_margin="5dp"
+            android:layout_margin="5dp"
             />
         <TextView
             android:id="@+id/words_number"

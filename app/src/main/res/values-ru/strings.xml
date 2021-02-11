@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Лаоши</string>
+    <string name="app_name">LaoshiTest</string>
     <string name="from_books_string">из учебников</string>
     <string name="by_topics_string">по темам</string>
     <string name="mine_string">мои</string>

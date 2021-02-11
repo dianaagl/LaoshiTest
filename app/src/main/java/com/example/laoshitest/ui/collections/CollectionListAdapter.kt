@@ -1,12 +1,11 @@
 package com.example.laoshitest.ui.collections
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.os.ConfigurationCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.example.laoshitest.R
 import com.example.laoshitest.data.entityData.Collection
 import com.example.laoshitest.utils.Utils
@@ -25,7 +24,7 @@ class CollectionListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.descriptionView.text = item.title.get(Utils.getLng(context))
+        holder.descriptionView.text = item.title[Utils.getLng(context)]
         holder.numberView.text = item.wordsCount.toString()
         holder.itemView.setOnClickListener { clickListener(item) }
     }

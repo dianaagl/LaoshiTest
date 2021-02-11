@@ -3,7 +3,6 @@ package com.example.laoshitest.ui.words
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,13 +16,8 @@ class WordsActivity: AppCompatActivity() {
     companion object{
         const val entityId = "entityId"
         const val entityType = "entityType"
-        enum class entityTypes{
-            COLLECTION,
-            BOOK,
-            HSK
-        }
     }
-    lateinit var wordsViewModel: WordsViewModel
+    private lateinit var wordsViewModel: WordsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.words_mainactivity)
@@ -42,13 +36,13 @@ class WordsActivity: AppCompatActivity() {
         val entityId = intent.extras?.get(WordsActivity.entityId) as Int
         val entityType = intent.extras?.get(WordsActivity.entityType) as String
 
-        wordsViewModel = ViewModelProvider(this).get<WordsViewModel>(WordsViewModel::class.java)
+        wordsViewModel = ViewModelProvider(this).get(WordsViewModel::class.java)
         wordsViewModel.initData(entityId, entityType, Utils.getLng(this))
 
-        wordsViewModel.words.observe(this, Observer {
+        wordsViewModel.words.observe(this, {
             adapter.updateList(it)
         })
-        wordsViewModel.title.observe(this, Observer {
+        wordsViewModel.title.observe(this, {
             title.text = it
         })
     }
